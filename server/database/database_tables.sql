@@ -11,7 +11,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE projects (
-  proj_id SERIAL PRIMARY KEY,
+  proj_id SERIAL PRIMARY KEY ON DELETE CASCADE,
   proj_name VARCHAR(100) NOT NULL,
   proj_desc VARCHAR(500),
   user_id INTEGER REFERENCES users(user_id),
@@ -24,7 +24,7 @@ CREATE TABLE group_projects (
 );
 
 CREATE TABLE user_stories (
-  story_id SERIAL PRIMARY KEY,
+  story_id SERIAL PRIMARY KEY ON DELETE CASCADE,
   proj_id INTEGER REFERENCES projects(proj_id),
   story_title VARCHAR(100) NOT NULL,
   story_desc VARCHAR(3000) NOT NULL,
