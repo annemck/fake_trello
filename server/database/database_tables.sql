@@ -17,7 +17,6 @@ CREATE TABLE projects (
   user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE user_stories (
   story_id SERIAL PRIMARY KEY,
   proj_id INTEGER REFERENCES projects(proj_id) ON DELETE CASCADE,
@@ -31,8 +30,9 @@ CREATE TABLE user_stories (
 CREATE TABLE tasks (
   task_id SERIAL PRIMARY KEY,
   story_id INTEGER REFERENCES user_stories(story_id) ON DELETE CASCADE,
+  proj_id INTEGER REFERENCES projects(proj_id) ON DELETE CASCADE,
   task_title VARCHAR(100) NOT NULL,
-  task_description VARCHAR(1000) NOT NULL,
+  task_desc VARCHAR(1000) NOT NULL,
   task_notes VARCHAR(5000),
   created_date DATE,
   updated_date DATE,
