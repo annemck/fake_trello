@@ -2,12 +2,14 @@ DROP DATABASE project_management;
 
 CREATE DATABASE project_management;
 
+CREATE EXTENSION pgcrypto;
+
 CREATE TABLE users (
   user_id SERIAL PRIMARY KEY,
   user_email VARCHAR(255) UNIQUE,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(255),
-  user_password VARCHAR(255) NOT NULL CHECK (length(user_password) >= 8)
+  user_password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE projects (
@@ -22,7 +24,7 @@ CREATE TABLE user_stories (
   proj_id INTEGER REFERENCES projects(proj_id) ON DELETE CASCADE,
   story_title VARCHAR(100) NOT NULL,
   story_desc VARCHAR(3000) NOT NULL,
-  created_date DATE NOT NULL,
+  created_date DATE DEFAULT current_date,
   updated_date DATE,
   complete CHAR(1) NOT NULL DEFAULT 'N'
 );
@@ -34,7 +36,7 @@ CREATE TABLE tasks (
   task_title VARCHAR(100) NOT NULL,
   task_desc VARCHAR(1000) NOT NULL,
   task_notes VARCHAR(5000),
-  created_date DATE,
+  created_date DATE DEFAULT current_date,
   updated_date DATE,
   task_position VARCHAR(7) NOT NULL DEFAULT 'BACKLOG'
 );
