@@ -14,23 +14,16 @@ CREATE TABLE projects (
   proj_id SERIAL PRIMARY KEY,
   proj_name VARCHAR(100) NOT NULL,
   proj_desc VARCHAR(500),
-  user_id INTEGER REFERENCES users(user_id),
-  collab CHAR(1) NOT NULL DEFAULT 'N'
+  user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE group_projects (
-  proj_id INTEGER REFERENCES projects(proj_id) ON DELETE CASCADE,
-  user_id INTEGER REFERENCES users(user_id)
-);
 
 CREATE TABLE user_stories (
   story_id SERIAL PRIMARY KEY,
   proj_id INTEGER REFERENCES projects(proj_id) ON DELETE CASCADE,
   story_title VARCHAR(100) NOT NULL,
   story_desc VARCHAR(3000) NOT NULL,
-  created_by INTEGER,
   created_date DATE NOT NULL,
-  updated_by INTEGER,
   updated_date DATE,
   complete CHAR(1) NOT NULL DEFAULT 'N'
 );
@@ -41,9 +34,7 @@ CREATE TABLE tasks (
   task_title VARCHAR(100) NOT NULL,
   task_description VARCHAR(1000) NOT NULL,
   task_notes VARCHAR(5000),
-  created_by INTEGER,
   created_date DATE,
-  updated_by INTEGER,
   updated_date DATE,
   task_position VARCHAR(7) NOT NULL DEFAULT 'BACKLOG'
 );
