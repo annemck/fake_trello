@@ -9,7 +9,22 @@ app.use(express.json()); //req.body
 
 
 
-app.get("/users/:id", async(req, res) => {
+app.post("/user", async(req, res) => {
+  try {
+    
+    console.log(req.body);
+    const body = req.body;
+  
+    const newUser = await pool.query("INSERT INTO users(user_email, first_name, last_name, user_password) VALUES($1, $2, $3, $4) RETURNING user_id", [body.user_email, body.first_name, body.last_name, body.user_password]);
+    
+    res.json(newUser.rows);
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+app.get("/user/:id", async(req, res) => {
   try {
     
     const {id} = req.params;
@@ -22,6 +37,7 @@ app.get("/users/:id", async(req, res) => {
     console.log(err.message);
   }
 });
+
 
 
 
