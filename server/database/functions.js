@@ -1,5 +1,6 @@
 const function1 = "fn_hash_password";
-const function2 = "fn_create_update_date";
+const function2 = "fn_create_story_update_date";
+const function3 = "fn_create_task_update_date";
 
 module.exports = {
   function1: `CREATE OR REPLACE FUNCTION ${function1}()
@@ -15,6 +16,14 @@ module.exports = {
               LANGUAGE 'plpgsql';`,
               
   function2: `CREATE OR REPLACE FUNCTION ${function2}()
+              RETURNS trigger AS $$
+                BEGIN
+                  new.updated_date = current_date;
+                  RETURN NEW;
+                END $$
+              LANGUAGE 'plpgsql';`,
+              
+  function3: `CREATE OR REPLACE FUNCTION ${function3}()
               RETURNS trigger AS $$
                 BEGIN
                   new.updated_date = current_date;

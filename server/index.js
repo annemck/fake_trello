@@ -4,6 +4,7 @@ const app = express();
 const users = require('./routes/users.js');
 const projects = require('./routes/projects.js');
 const user_stories = require('./routes/user_stories.js');
+const tasks = require('./routes/tasks.js');
 
 app.use(cors());
 app.use(express.json());
@@ -30,6 +31,10 @@ app.get('/story/:id', user_stories.find);
 app.post('/story', user_stories.create);
 app.put('/story/:id', user_stories.update);
 app.delete('/story/:id', user_stories.remove);
+
+
+//Task CRUD action routes
+app.post('/task', tasks.create);
 
 
 

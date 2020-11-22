@@ -53,11 +53,15 @@ async function createDbObjects() {
     try{
       await client.query(functions.function1);
       await client.query(functions.function2);
+      await client.query(functions.function3);
       console.log("functions created");
       await client.query(triggers.dropTrigger1);
       await client.query(triggers.dropTrigger2);
+      await client.query(triggers.dropTrigger3);
+      
       await client.query(triggers.createTrigger1);
       await client.query(triggers.createTrigger2);
+      await client.query(triggers.createTrigger3);
       console.log("triggers created");
       
       await client.query(testUser);
