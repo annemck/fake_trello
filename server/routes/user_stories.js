@@ -17,3 +17,22 @@ exports.create = async function(req, res) {
     console.log(err.message);
   }
 };
+
+exports.find = async function(req, res) {
+  try {
+    const story_id = req.params.id;
+
+    const story = await pool.query(`SELECT story_title,
+                                            story_desc,
+                                            created_date,
+                                            updated_date,
+                                            complete
+                                    FROM user_stories
+                                    WHERE story_id = $1;`, [story_id]);
+
+    res.json(story.rows);
+
+  } catch (err) {
+    console.log(err.message);
+  }
+}

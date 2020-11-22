@@ -26,6 +26,7 @@ app.delete('/project/:id', projects.remove);
 
 
 //User story CRUD action routes
+app.get('/story/:id', user_stories.find);
 app.post('/story', user_stories.create);
 
 app.listen(app.settings.port, function() {
