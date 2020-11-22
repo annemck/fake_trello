@@ -35,4 +35,23 @@ exports.find = async function(req, res) {
   } catch (err) {
     console.log(err.message);
   }
+};
+
+exports.update = async function(req, res) {
+    try {
+
+      const {id} = req.params;
+      const details = req.body;
+
+      const editedStory = await pool.query(`UPDATE user_stories SET story_title = $1,
+                                            story_desc = $2,
+                                            complete = $3
+                                            WHERE story_id = $4;`
+        , [details.story_title, details.story_desc, details.complete, id]);
+
+      res.json("User story details updated");
+
+    } catch (err) {
+      console.log(err.message);
+    }
 }

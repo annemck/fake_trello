@@ -28,6 +28,7 @@ app.delete('/project/:id', projects.remove);
 //User story CRUD action routes
 app.get('/story/:id', user_stories.find);
 app.post('/story', user_stories.create);
+app.put('/story/:id', user_stories.update);
 
 app.listen(app.settings.port, function() {
   console.log('Server is running on port 5000. Press CTRL+C to stop server')
