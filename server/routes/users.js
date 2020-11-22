@@ -8,7 +8,7 @@ exports.create = async function(req, res) {
     const newUser = await pool.query(
       `INSERT INTO users(user_email, first_name, last_name, user_password)
       VALUES($1, $2, $3, $4)
-      RETURNING user_id`
+      RETURNING user_id;`
       , [details.user_email, details.first_name, details.last_name, details.user_password]);
     
     res.json(newUser.rows);
@@ -24,7 +24,7 @@ exports.find = async function(req, res) {
 
     const user = await pool.query(`SELECT user_email, first_name, last_name
                           FROM users
-                          WHERE user_id = $1`, [user_id]);
+                          WHERE user_id = $1;`, [user_id]);
     
     res.json(user.rows);
     
@@ -43,7 +43,7 @@ exports.update = async function(req, res) {
                                 first_name = $2,
                                 last_name = $3,
                                 user_password = $4
-                                WHERE user_id = $5`
+                                WHERE user_id = $5;`
         , [details.user_email, details.first_name, details.last_name, details.user_password, id]);
   
       res.json("User details updated");

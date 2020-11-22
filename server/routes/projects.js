@@ -8,7 +8,7 @@ exports.create = async function(req, res) {
     const newProject = await pool.query(
       `INSERT INTO projects(proj_name, proj_desc, user_id)
       VALUES($1, $2, $3)
-      RETURNING proj_id`
+      RETURNING proj_id;`
       , [details.proj_name, details.proj_desc, details.user_id]);
     
     res.json(newProject.rows);
@@ -24,7 +24,7 @@ exports.find = async function(req, res) {
 
     const project = await pool.query(`SELECT proj_name, proj_desc
                                     FROM projects
-                                    WHERE proj_id = $1`, [project_id]);
+                                    WHERE proj_id = $1;`, [project_id]);
 
     res.json(project.rows);
 
@@ -41,7 +41,7 @@ exports.update = async function(req, res) {
 
       const editedProject = await pool.query(`UPDATE projects SET proj_name = $1,
                                             proj_desc = $2
-                                            WHERE proj_id = $3`
+                                            WHERE proj_id = $3;`
         , [details.proj_name, details.proj_desc, id]);
 
       res.json("Project details updated");
