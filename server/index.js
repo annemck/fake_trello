@@ -34,6 +34,7 @@ app.delete('/story/:id', user_stories.remove);
 
 
 //Task CRUD action routes
+app.get('/task/:id', tasks.find);
 app.post('/task', tasks.create);
 
 

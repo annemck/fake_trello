@@ -17,3 +17,23 @@ exports.create = async function(req, res) {
     console.log(err.message);
   }
 };
+
+exports.find = async function(req, res) {
+  try {
+    const task_id = req.params.id;
+
+    const task = await pool.query(`SELECT task_title,
+                                            task_desc,
+                                            task_notes,
+                                            created_date,
+                                            updated_date,
+                                            task_position
+                                    FROM tasks
+                                    WHERE task_id = $1;`, [task_id]);
+
+    res.json(task.rows);
+
+  } catch (err) {
+    console.log(err.message);
+  }
+};

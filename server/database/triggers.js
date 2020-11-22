@@ -24,5 +24,5 @@ module.exports = {
   createTrigger3: `CREATE TRIGGER ${trigger3}
                   BEFORE UPDATE ON ${tables.table4}
                   FOR EACH ROW
-                  EXECUTE PROCEUDRE ${function3}();`
+                  EXECUTE PROCEDURE ${function3}();`
 }
