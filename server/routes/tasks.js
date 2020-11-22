@@ -37,3 +37,24 @@ exports.find = async function(req, res) {
     console.log(err.message);
   }
 };
+
+exports.update = async function(req, res) {
+    try {
+
+      const {id} = req.params;
+      const details = req.body;
+
+      const editedTask = await pool.query(`UPDATE tasks SET task_title = $1,
+                                            task_desc = $2,
+                                            task_notes = $3,
+                                            task_position = $4,
+                                            story_id = $5
+                                            WHERE task_id = $6;`
+        , [details.task_title, details.task_desc, details.task_notes, details.task_position, details.story_id, id]);
+
+      res.json("Task details updated");
+
+    } catch (err) {
+      console.log(err.message);
+    }
+};
