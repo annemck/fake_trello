@@ -20,7 +20,7 @@ app.delete('/user/:id', users.remove);
 //Project CRUD action routes
 app.get('/project/:id', projects.find);
 app.post('/project', projects.create);
-// app.put('/project/:id', projects.update);
+app.put('/project/:id', projects.update);
 // app.delete('/project/:id', projects.remove);
 
 app.listen(app.settings.port, function() {

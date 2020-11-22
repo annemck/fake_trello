@@ -36,30 +36,31 @@ exports.find = async function(req, res) {
     console.log(err.message);
   }
 }
-//
-// exports.update = async function(req, res) {
-//     try {
-//
-//       const {project_id} = req.params;
-//       const details = req.body;
-//
-//       const editedProject = await pool.query(`UPDATE projects SET proj_name = $1,
-//                                             proj_desc = $2,
-//                                             WHERE proj_id = $3`
-//         , [details.proj_name, details.proj_desc, project_id]);
-//
-//       res.json("Project details updated");
-//
-//     } catch (err) {
-//       console.log(err.message);
-//     }
-// }
+
+exports.update = async function(req, res) {
+    try {
+
+      const {id} = req.params;
+      const details = req.body;
+      console.log(id);
+
+      const editedProject = await pool.query(`UPDATE projects SET proj_name = $1,
+                                            proj_desc = $2
+                                            WHERE proj_id = $3`
+        , [details.proj_name, details.proj_desc, id]);
+
+      res.json("Project details updated");
+
+    } catch (err) {
+      console.log(err.message);
+    }
+}
 //
 // exports.remove = async function(req, res) {
 //   try {
-//     const {project_id} = req.params;
+//     const {id} = req.params;
 //     const deleteProject = await pool.query(`DELETE FROM projects
-//                                         WHERE proj_id = $1;`, [project_id]);
+//                                         WHERE proj_id = $1;`, [id]);
 //
 //     res.json("Project and associated tasks deleted");
 //   } catch (err) {
