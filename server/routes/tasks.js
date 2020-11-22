@@ -58,3 +58,16 @@ exports.update = async function(req, res) {
       console.log(err.message);
     }
 };
+
+exports.remove = async function(req, res) {
+  try {
+    const {id} = req.params;
+    const deleteTask = await pool.query(`DELETE FROM tasks
+                                        WHERE task_id = $1;`, [id]);
+
+    res.json("Task deleted");
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+};

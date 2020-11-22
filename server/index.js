@@ -37,6 +37,7 @@ app.delete('/story/:id', user_stories.remove);
 app.get('/task/:id', tasks.find);
 app.post('/task', tasks.create);
 app.put('/task/:id', tasks.update);
+app.delete('/task/:id', tasks.remove);
 
 
 
