@@ -21,7 +21,7 @@ app.delete('/user/:id', users.remove);
 app.get('/project/:id', projects.find);
 app.post('/project', projects.create);
 app.put('/project/:id', projects.update);
-// app.delete('/project/:id', projects.remove);
+app.delete('/project/:id', projects.remove);
 
 app.listen(app.settings.port, function() {
   console.log('Server is running on port 5000. Press CTRL+C to stop server')

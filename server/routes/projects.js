@@ -10,8 +10,6 @@ exports.create = async function(req, res) {
       VALUES($1, $2, $3)
       RETURNING proj_id`
       , [details.proj_name, details.proj_desc, details.user_id]);
-      
-    console.log('post function running');
     
     res.json(newProject.rows);
 
@@ -28,8 +26,6 @@ exports.find = async function(req, res) {
                                     FROM projects
                                     WHERE proj_id = $1`, [project_id]);
 
-    console.log("find function running");
-
     res.json(project.rows);
 
   } catch (err) {
@@ -42,7 +38,6 @@ exports.update = async function(req, res) {
 
       const {id} = req.params;
       const details = req.body;
-      console.log(id);
 
       const editedProject = await pool.query(`UPDATE projects SET proj_name = $1,
                                             proj_desc = $2
@@ -55,15 +50,15 @@ exports.update = async function(req, res) {
       console.log(err.message);
     }
 }
-//
-// exports.remove = async function(req, res) {
-//   try {
-//     const {id} = req.params;
-//     const deleteProject = await pool.query(`DELETE FROM projects
-//                                         WHERE proj_id = $1;`, [id]);
-//
-//     res.json("Project and associated tasks deleted");
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// }
+
+exports.remove = async function(req, res) {
+  try {
+    const {id} = req.params;
+    const deleteProject = await pool.query(`DELETE FROM projects
+                                        WHERE proj_id = $1;`, [id]);
+
+    res.json("Project and associated tasks deleted");
+  } catch (err) {
+    console.log(err.message);
+  }
+}

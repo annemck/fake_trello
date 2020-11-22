@@ -10,8 +10,6 @@ exports.create = async function(req, res) {
       VALUES($1, $2, $3, $4)
       RETURNING user_id`
       , [details.user_email, details.first_name, details.last_name, details.user_password]);
-      
-    console.log('post function running');
     
     res.json(newUser.rows);
 
@@ -27,8 +25,6 @@ exports.find = async function(req, res) {
     const user = await pool.query(`SELECT user_email, first_name, last_name
                           FROM users
                           WHERE user_id = $1`, [user_id]);
-    
-    console.log("find function running");
     
     res.json(user.rows);
     
