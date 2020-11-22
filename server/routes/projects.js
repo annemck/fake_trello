@@ -18,6 +18,20 @@ exports.create = async function(req, res) {
   }
 };
 
+exports.allProjects = async function(req, res) {
+  try {
+    const user_id = req.params.id;
+    
+    const allProjects = await pool.query(`SELECT proj_id, proj_name, proj_desc
+                                          FROM projects
+                                          WHERE user_id = $1;`, [user_id]);
+                                          
+    res.json(allProjects.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 exports.find = async function(req, res) {
   try {
     const project_id = req.params.id;
