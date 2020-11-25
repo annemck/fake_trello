@@ -18,7 +18,23 @@ exports.create = async function(req, res) {
   }
 };
 
-exports.find = async function(req, res) {
+exports.findByLogin = async function(req, res) {
+  try {
+    const userEmail = req.params.email;
+    const userPassword = req.params.password;
+    
+    const user = await pool.query(`SELECT first_name, last_name, user_id
+                          FROM users
+                          WHERE user_email = $1
+                          AND user_password = crypt($2, user_password)`, [userEmail, userPassword]);
+    res.json(user.rows);
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+exports.findById = async function(req, res) {
   try {
     const user_id = req.params.id;
 

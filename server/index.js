@@ -13,7 +13,8 @@ app.set('port', process.env.PORT || 5000);
 
 
 //User CRUD action routes
-app.get('/user/:id', users.find);
+app.get('/login/:email/:password', users.findByLogin);
+app.get('/user/:id', users.findById);
 app.post('/user', users.create);
 app.put('/user/:id', users.update);
 app.delete('/user/:id', users.remove);

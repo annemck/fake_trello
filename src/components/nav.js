@@ -4,10 +4,11 @@ import Projects from './projects.js';
 import LogIn from './login.js';
 
 const Navigation = () => {
+
   return(
     <div>
-      <NavLink to="/">LogIn</NavLink>
-      <NavLink to="/user/:id/projects">View Projects</NavLink>
+      <NavLink to="/:id/projects">Your Projects</NavLink>
+      <NavLink to="/">Log In/Out</NavLink>
     </div>
   );
 }

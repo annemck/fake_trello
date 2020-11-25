@@ -1,4 +1,7 @@
 import React from 'react';
+import LogIn from './login.js';
+
+//if user is loged in show projects, otherwise render login page
 
 const Projects = () => {
   return(

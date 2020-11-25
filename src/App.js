@@ -14,8 +14,8 @@ class App extends Component{
         <div>
             <Navigation/>
             <Switch>
+              <Route path="/:id/projects" exact component={Projects}/>
               <Route path="/" exact component={LogIn}/>
-              <Route path="/user/:id/projects" exact component={Projects}/>
             </Switch>
         
         </div>
