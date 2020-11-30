@@ -22,6 +22,7 @@ app.delete('/user/:id', users.remove);
 
 //Project CRUD action routes
 app.get('/project/:id', projects.find);
+app.get(':user_id/project', projects.getAll);
 app.post('/project', projects.create);
 app.put('/project/:id', projects.update);
 app.delete('/project/:id', projects.remove);

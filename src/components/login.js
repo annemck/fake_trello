@@ -15,7 +15,10 @@ const LogIn = () => {
       
       fetch(`http://localhost:5000/login/${userEmail}/${userPassword}`)
       .then((response) => response.json())
-      .then((data) => history.push(`${data[0].user_id}/projects`))
+      .then((data) => history.push({pathname: `${data[0].user_id}/projects`,
+                                            state: {first_name: data[0].first_name,
+                                                    user_id: data[0].user_id}}))
+      //.then((data) => history.push(`${data[0].user_id}/projects`))
       
     } catch (err){
       console.log(err.message);
