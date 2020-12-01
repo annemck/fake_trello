@@ -1,27 +1,45 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 
+
 const LogIn = () => {
-  
+
   const history = useHistory();
   let [userEmail, setEmail] = useState(" ");
   let [userPassword, setPassword] = useState("");
-  
+
   const handleSubmit = async (e) => {
     try{
       e.preventDefault();
-      
+
       userEmail = userEmail.trim();
-      
+
       fetch(`http://localhost:5000/login/${userEmail}/${userPassword}`)
-      .then((response) => response.json())
-      .then((data) => history.push(`${data[0].user_id}/projects`))
-      
-    } catch (err){
+      .then((userResponse) => userResponse.json())
+      .then((userData) => fetch(`http://localhost:5000/${userData[0].user_id}/projects`)
+                      .then((projectResponse) => projectResponse.json())
+                      .then((projectData) => history.push({pathname: `${userData[0].user_id}/projects`,
+                      state: {user: {userId: userData[0].user_id,
+                                    firstName: userData[0].first_name,
+                                    lastName: userData[0].last_name},
+                              projects: [projectData]
+                            }
+                      })))
+
+      // .then((data) => history.push({pathname: `${data[0].user_id}/projects`,
+      //                               state: {userId: data[0].user_id,
+      //                                   firstName: data[0].first_name,
+      //                                   lastName: data[0].last_name}
+      //                               }
+      //                             )
+      //       )
+    }
+    catch (err)
+    {
       console.log(err.message);
     }
   };
-  
+
   return(
     <div>
       <p>Please enter your login details.</p>

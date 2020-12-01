@@ -33,6 +33,20 @@ exports.find = async function(req, res) {
   }
 }
 
+exports.getAll = async function(req, res) {
+  try{
+    const user_id = req.params.id;
+    
+    const allProjects = await pool.query(`SELECT proj_name, proj_id
+                                          FROM projects
+                                          WHERE user_id = $1;`, [user_id]);
+                                          
+    res.json(allProjects.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 exports.update = async function(req, res) {
     try {
 
