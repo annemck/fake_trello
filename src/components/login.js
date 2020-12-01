@@ -26,13 +26,6 @@ const LogIn = () => {
                             }
                       })))
 
-      // .then((data) => history.push({pathname: `${data[0].user_id}/projects`,
-      //                               state: {userId: data[0].user_id,
-      //                                   firstName: data[0].first_name,
-      //                                   lastName: data[0].last_name}
-      //                               }
-      //                             )
-      //       )
     }
     catch (err)
     {
